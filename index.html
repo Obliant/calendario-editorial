@@ -115,6 +115,17 @@
   .checklist li:before{content:"☐";position:absolute;left:15px;top:10px;font-size:15px;color:var(--accent)}
 
   .nota{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:14px}
+
+  /* ---------- Voltar ao topo ---------- */
+  #topo{position:fixed;right:20px;bottom:20px;z-index:50;display:inline-flex;align-items:center;gap:7px;
+    background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:999px;
+    padding:10px 16px;font-family:var(--font-body);font-size:12.5px;font-weight:600;cursor:pointer;
+    box-shadow:0 3px 14px rgba(0,0,0,.13);opacity:0;visibility:hidden;transition:opacity .18s ease,visibility .18s ease}
+  #topo.on{opacity:1;visibility:visible}
+  #topo:hover{border-color:var(--accent);color:var(--accent)}
+  #topo span{font-size:14px;line-height:1}
+  @media (max-width:720px){ #topo{right:14px;bottom:14px;padding:9px 14px;font-size:12px} }
+  @media print{ #topo{display:none} }
   footer{border-top:1px solid var(--line);margin-top:20px;padding-top:22px;font-size:12px;color:var(--muted);line-height:1.6}
 
   @media (max-width:720px){
@@ -151,6 +162,7 @@
   <a href="#cadencia">Cadência</a>
   <a href="#pilares">Pilares</a>
   <a href="#guia">Guia de escrita</a>
+  <a href="#imagens">Imagens</a>
   <a href="#video">Cases</a>
   <a href="#agosto">Agosto</a>
   <a href="#setembro">Setembro</a>
@@ -266,7 +278,7 @@
       </table>
     </div>
 
-    <h3>Imagens — quando usar e quando não</h3>
+    <h3 id="imagens">Imagens — quando usar e quando não</h3>
     <div class="tw">
       <table>
         <thead><tr><th>Onde</th><th>Regra</th><th>Por quê</th></tr></thead>
@@ -1241,5 +1253,23 @@ Quantos dias úteis reais o seu Q4 tem?
   </footer>
 
 </div>
+
+<button id="topo" type="button" aria-label="Voltar ao topo"><span>&uarr;</span> Voltar ao topo</button>
+
+<script>
+(function(){
+  var btn = document.getElementById('topo');
+  function alternar(){
+    if (window.pageYOffset > 500) btn.classList.add('on');
+    else btn.classList.remove('on');
+  }
+  window.addEventListener('scroll', alternar, {passive:true});
+  // Duas coordenadas, nao o objeto com behavior: a forma em objeto nao rola em
+  // alguns navegadores. A suavidade vem do scroll-behavior do CSS.
+  btn.addEventListener('click', function(){ window.scrollTo(0, 0); });
+  alternar();
+})();
+</script>
+
 </body>
 </html>
