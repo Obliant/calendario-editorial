@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omnichannel · Calendário editorial</title>
+<style>
+  :root{
+    --ink:#12181F; --paper:#F3F4EF; --panel:#FFFFFF; --panel-2:#F8F9F5;
+    --accent:#748029; --accent-bright:#BCD848; --line:#DEE1D6; --muted:#5B6472;
+    --hero-bg:#0C1119; --hero-text:#F3F4EF; --hero-line:rgba(243,244,239,.14); --hero-accent:#D6E878; --hero-muted:#9AA3AE;
+    --li:#2563EB; --ig:#C0397A; --warn:#B45309; --warn-bg:rgba(180,83,9,.09);
+    --font-head:Georgia,'Iowan Old Style','Palatino Linotype',serif;
+    --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    --font-mono:ui-monospace,'SF Mono',Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --ink:#EDEFE7; --paper:#12161C; --panel:#191F27; --panel-2:#1E2530; --accent:#BCD848; --accent-bright:#D6E878; --line:#2B323C; --muted:#9AA3AE; --li:#7DA6FF; --ig:#F08BB8; --warn:#F0B15E; --warn-bg:rgba(240,177,94,.10); }
+  }
+  :root[data-theme="dark"]{ --ink:#EDEFE7; --paper:#12161C; --panel:#191F27; --panel-2:#1E2530; --accent:#BCD848; --accent-bright:#D6E878; --line:#2B323C; --muted:#9AA3AE; --li:#7DA6FF; --ig:#F08BB8; --warn:#F0B15E; --warn-bg:rgba(240,177,94,.10); }
+  :root[data-theme="light"]{ --ink:#12181F; --paper:#F3F4EF; --panel:#FFFFFF; --panel-2:#F8F9F5; --accent:#748029; --accent-bright:#BCD848; --line:#DEE1D6; --muted:#5B6472; --li:#2563EB; --ig:#C0397A; --warn:#B45309; --warn-bg:rgba(180,83,9,.09); }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-variant-numeric:tabular-nums}
+  h1,h2,h3{text-wrap:balance}
+  p{line-height:1.65}
+
+  /* ---------- Hero ---------- */
+  .hero{background:var(--hero-bg);color:var(--hero-text);padding:60px 28px 64px;position:relative;overflow:hidden}
+  .hero:before{content:"";position:absolute;top:-120px;right:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(214,232,120,.16),transparent 70%)}
+  .hero-inner{max-width:880px;margin:0 auto;position:relative}
+  .hero .brand{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+  .hero .mark{width:32px;height:32px;border-radius:8px;background:var(--hero-accent);flex:0 0 auto}
+  .hero .brand-text strong{display:block;font-family:var(--font-head);font-size:17px;color:var(--hero-text)}
+  .hero .brand-text span{display:block;font-size:11.5px;color:var(--hero-muted);margin-top:1px}
+  .hero .eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--hero-accent);margin-bottom:16px}
+  .hero h1{font-family:var(--font-head);font-weight:400;font-size:42px;line-height:1.14;margin:0 0 18px;max-width:18ch;letter-spacing:-.01em}
+  .hero .sub{font-size:16.5px;line-height:1.65;color:var(--hero-muted);max-width:60ch;margin:0 0 30px}
+  .hero-facts{display:flex;flex-wrap:wrap;gap:10px}
+  .hero-fact{background:rgba(214,232,120,.08);border:1px solid var(--hero-line);border-radius:10px;padding:11px 16px}
+  .hero-fact .k{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--hero-muted)}
+  .hero-fact .v{font-size:14.5px;color:var(--hero-accent);margin-top:3px;font-weight:600}
+
+  /* ---------- Índice ---------- */
+  nav.toc{max-width:880px;margin:0 auto;padding:22px 28px 0;display:flex;flex-wrap:wrap;gap:8px}
+  nav.toc a{font-size:12px;text-decoration:none;color:var(--muted);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 13px}
+  nav.toc a:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* ---------- Body ---------- */
+  .doc{max-width:880px;margin:0 auto;padding:34px 28px 80px}
+  .section{margin-bottom:56px;scroll-margin-top:16px}
+  h2{font-family:var(--font-head);font-weight:400;font-size:24px;margin:0 0 6px;letter-spacing:-.005em}
+  h3{font-family:var(--font-head);font-weight:400;font-size:18px;margin:26px 0 8px}
+  .section-sub{font-size:13.5px;color:var(--muted);margin:0 0 22px;max-width:64ch;line-height:1.6}
+
+  /* ---------- Callout ---------- */
+  .callout{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent-bright);border-radius:0 12px 12px 0;padding:18px 22px;margin:0 0 22px}
+  .callout b.lbl{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+  .callout p{margin:0 0 8px;font-size:13.5px}
+  .callout p:last-child{margin-bottom:0}
+  .callout.warn{border-left-color:var(--warn);background:var(--warn-bg)}
+  .callout.warn b.lbl{color:var(--warn)}
+
+  /* ---------- Tabelas ---------- */
+  .tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:13px}
+  th{text-align:left;font-family:var(--font-mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:11px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5}
+  tr:last-child td{border-bottom:0}
+
+  /* ---------- Pilares ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .pill{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .pill .ptop{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .pill h3{font-family:var(--font-head);font-weight:400;font-size:17px;margin:0}
+  .pill .pct{font-family:var(--font-mono);font-size:15px;font-weight:700;color:var(--accent)}
+  .pill p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.55}
+
+  /* ---------- Semanas e posts ---------- */
+  .week{margin-bottom:26px}
+  .week-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:10px 0 12px;border-bottom:2px solid var(--accent-bright);margin-bottom:14px;flex-wrap:wrap}
+  .week-head b{font-family:var(--font-mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+  .week-head span{font-size:12.5px;color:var(--muted)}
+
+  .post{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:0;margin-bottom:12px;overflow:hidden}
+  .post-head{padding:14px 20px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+  .post-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:7px}
+  .post-head h4{margin:0;font-size:15.5px;font-weight:600;line-height:1.35}
+  .post-body{padding:16px 20px 18px}
+  .rotulo{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 6px}
+  .copy{white-space:pre-line;font-size:13.5px;line-height:1.72;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0}
+  .copy b{font-weight:700}
+  .nota-post{font-size:12.5px;color:var(--muted);line-height:1.55;margin:12px 0 0;padding-left:12px;border-left:2px solid var(--line)}
+  .cards{margin:12px 0 0;padding-left:18px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+  .cards li{margin-bottom:4px}
+  .cards li b{color:var(--ink)}
+
+  .rede{display:inline-block;font-family:var(--font-mono);font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .rede.li{background:rgba(37,99,235,.12);color:var(--li)}
+  .rede.ig{background:rgba(192,57,122,.12);color:var(--ig)}
+  .tag{display:inline-block;font-family:var(--font-mono);font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+  .dia{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);white-space:nowrap;font-weight:600}
+
+  /* ---------- Banco ---------- */
+  .banco{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .bloco{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .bloco h4{margin:0 0 10px;font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;font-family:var(--font-mono)}
+  .bloco ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px}
+  .bloco li{font-size:12.5px;line-height:1.5}
+
+  .checklist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  .checklist li{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:13px;line-height:1.55;padding-left:38px;position:relative}
+  .checklist li:before{content:"☐";position:absolute;left:15px;top:10px;font-size:15px;color:var(--accent)}
+
+  .nota{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:14px}
+  footer{border-top:1px solid var(--line);margin-top:20px;padding-top:22px;font-size:12px;color:var(--muted);line-height:1.6}
+
+  @media (max-width:720px){
+    .hero h1{font-size:32px}
+    .pillars,.banco{grid-template-columns:1fr}
+    .doc{padding:28px 18px 60px}
+    nav.toc{padding:18px 18px 0}
+    .post-body{padding:14px 15px 16px}
+    .copy{padding:14px 15px}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="mark"></div>
+      <div class="brand-text"><strong>Obliant</strong><span>Squad Omnichannel · PE 3Q26</span></div>
+    </div>
+    <div class="eyebrow">Calendário editorial · agosto a novembro de 2026</div>
+    <h1>Conteúdo orgânico para LinkedIn e Instagram</h1>
+    <p class="sub">Guia completo de conteúdo enquanto a campanha de Google Ads não sobe: cadência, pilares, guia de escrita e os 24 posts de agosto e setembro já redigidos. Foco nos produtos da Fase 1 — PMGO e PMO.</p>
+    <div class="hero-facts">
+      <div class="hero-fact"><div class="k">Cadência</div><div class="v">3 posts por semana</div></div>
+      <div class="hero-fact"><div class="k">Prontos para publicar</div><div class="v">24 posts</div></div>
+      <div class="hero-fact"><div class="k">Período</div><div class="v">11/08 a 27/11</div></div>
+    </div>
+  </div>
+</div>
+
+<nav class="toc">
+  <a href="#usar">Como usar</a>
+  <a href="#cadencia">Cadência</a>
+  <a href="#pilares">Pilares</a>
+  <a href="#guia">Guia de escrita</a>
+  <a href="#video">Vídeo e cases</a>
+  <a href="#agosto">Agosto</a>
+  <a href="#setembro">Setembro</a>
+  <a href="#out-nov">Out e nov</a>
+  <a href="#banco">Banco de temas</a>
+  <a href="#rotina">Rotina</a>
+  <a href="#indicadores">Indicadores</a>
+</nav>
+
+<div class="doc">
+
+  <!-- ============ COMO USAR ============ -->
+  <div class="section" id="usar">
+    <h2>Como usar este guia</h2>
+    <p class="section-sub">Agosto e setembro estão escritos post a post — é copiar, revisar e publicar. Outubro e novembro estão em nível de tema, para serem desdobrados com o que a audiência mostrar até lá.</p>
+
+    <div class="callout">
+      <b class="lbl">A regra que faz o calendário funcionar</b>
+      <p>Alcance orgânico de <b>página de empresa</b> no LinkedIn fica na faixa de 2% a 5% dos seguidores. Se o post sair só pela página da Obliant, praticamente ninguém vê.</p>
+      <p>Em B2B, o alcance mora nos <b>perfis pessoais</b>. Todo post da página precisa ser republicado no mesmo dia pelos perfis da <b>Juliana, Julia e Isabelle</b>, cada uma com um comentário próprio — não o compartilhamento seco. Se a Fabíola entrar, multiplica.</p>
+      <p>Sem isso, o calendário roda e o resultado não aparece — e a conclusão errada vai ser "conteúdo não funciona".</p>
+    </div>
+
+    <p class="nota"><b>Expectativa de prazo:</b> conteúdo orgânico em B2B leva de 8 a 12 semanas para virar conversa comercial. Começando em 11/08, o primeiro sinal real aparece entre meados de outubro e o começo de novembro. Registrar isso agora evita a leitura de que "não deu certo" já em setembro.</p>
+
+    <p class="nota"><b>Textos são ponto de partida, não script.</b> Cada post foi escrito para soar como alguém que opera PMO, não como material de marketing. Ajuste o que não for verdade para a Obliant — principalmente números e casos. Post com dado inventado destrói mais confiança do que a ausência dele constrói.</p>
+  </div>
+
+  <!-- ============ CADÊNCIA ============ -->
+  <div class="section" id="cadencia">
+    <h2>Cadência por rede</h2>
+    <p class="section-sub">Três posts originais por semana. É o volume que três pessoas sustentam por quatro meses sem abandonar no meio — e consistência vale mais do que volume.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Dia</th><th>Rede</th><th>O que sai</th><th>Tempo estimado</th></tr></thead>
+        <tbody>
+          <tr><td><b>Terça</b></td><td><span class="rede li">LinkedIn</span></td><td>Post autoral — método, opinião ou análise</td><td>40 a 60 min</td></tr>
+          <tr><td><b>Quarta</b></td><td><span class="rede ig">Instagram</span></td><td>Carrossel ou card, geralmente derivado do post de terça</td><td>30 a 40 min</td></tr>
+          <tr><td><b>Quinta</b></td><td><span class="rede li">LinkedIn</span></td><td>Post autoral — sintoma, caso ou dado</td><td>40 a 60 min</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="nota">Os dois canais têm papéis diferentes. O <b>LinkedIn</b> é onde as personas da proposta estão — Head/Gerente de Projetos e Diretor(a) de Operações, TI ou Projetos. O <b>Instagram</b> não gera lead de ticket alto em B2B; ele existe para sustentar a checagem: quando alguém ouve falar da Obliant e vai procurar, um perfil parado há meses derruba a confiança que o LinkedIn construiu.</p>
+
+    <p class="nota"><b>Feriados:</b> nenhum feriado nacional entre agosto e novembro de 2026 cai em terça, quarta ou quinta — 07/09, 12/10 e 02/11 caem na segunda, 15/11 no domingo e 20/11 na sexta. A cadência não quebra em nenhuma semana do período.</p>
+  </div>
+
+  <!-- ============ PILARES ============ -->
+  <div class="section" id="pilares">
+    <h2>Os quatro pilares</h2>
+    <p class="section-sub">A proporção importa tanto quanto os temas. Um feed que só fala de produto não responde à pergunta que o decisor realmente faz — "essa empresa entende do meu problema?" — e o conteúdo vira catálogo.</p>
+
+    <div class="pillars">
+      <div class="pill">
+        <div class="ptop"><h3>Sintoma</h3><div class="pct">8 de 24</div></div>
+        <p>A dor antes do produto. Descreve uma situação que o decisor reconhece na própria empresa, sem citar solução. É o pilar que faz a pessoa parar de rolar.</p>
+      </div>
+      <div class="pill">
+        <div class="ptop"><h3>Método</h3><div class="pct">10 de 24</div></div>
+        <p>Como se resolve. Constrói autoridade — mostra que a Obliant sabe fazer, não só diagnosticar. É o conteúdo que gera salvamento.</p>
+      </div>
+      <div class="pill">
+        <div class="ptop"><h3>Prova</h3><div class="pct">4 de 24</div></div>
+        <p>Caso, número, bastidor. Inclui como a própria squad trabalha — o conteúdo mais fácil de produzir e o mais subestimado.</p>
+      </div>
+      <div class="pill">
+        <div class="ptop"><h3>Oferta</h3><div class="pct">2 de 24</div></div>
+        <p>O convite direto. Aparece só a partir da sétima semana, depois de a audiência estar construída. Em minoria, senão cansa.</p>
+      </div>
+    </div>
+
+    <p class="nota">A proporção muda ao longo do trimestre. <b>Agosto</b> pesa em Sintoma — o objetivo é reconhecimento, não venda. <b>Setembro</b> pesa em Método, para construir autoridade. <b>Outubro e novembro</b> sobem Prova e Oferta, porque aí já existe audiência para receber o convite.</p>
+
+    <p class="nota"><b>Por que o foco é PMGO e PMO:</b> são os produtos da Fase 1 na proposta de tráfego — ticket médio real, demanda validada, persona conhecida. Escritório de Projetos e GMO entram na Fase 2. Falar dos seis agora dispersa a audiência que estamos tentando construir.</p>
+  </div>
+
+  <!-- ============ GUIA DE ESCRITA ============ -->
+  <div class="section" id="guia">
+    <h2>Guia de escrita</h2>
+    <p class="section-sub">O formato muda muito o resultado — mais do que o tema. Estas são as regras que valem para todos os posts do calendário.</p>
+
+    <h3>LinkedIn</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Elemento</th><th>Regra</th><th>Por quê</th></tr></thead>
+        <tbody>
+          <tr><td><b>Gancho</b></td><td>As duas primeiras linhas precisam funcionar sozinhas — cerca de 140 a 200 caracteres antes do "ver mais"</td><td>É o único trecho que aparece no feed. Se não parar a rolagem ali, o resto não existe.</td></tr>
+          <tr><td><b>Parágrafos</b></td><td>Uma a duas linhas cada, com linha em branco entre eles</td><td>Bloco denso no celular é ignorado.</td></tr>
+          <tr><td><b>Tamanho</b></td><td>150 a 250 palavras</td><td>Longo o bastante para ter substância, curto o bastante para ser lido inteiro.</td></tr>
+          <tr><td><b>Links</b></td><td>Nunca no corpo do post. Vão no primeiro comentário.</td><td>Post com link externo tem alcance reduzido — o LinkedIn não quer mandar gente para fora.</td></tr>
+          <tr><td><b>Fecho</b></td><td>Uma pergunta aberta e específica</td><td>Comentário é o sinal que mais amplifica o alcance. Pergunta genérica não gera comentário.</td></tr>
+          <tr><td><b>Hashtags</b></td><td>3 a 5, ao final</td><td>Mais que isso parece spam e não amplia.</td></tr>
+          <tr><td><b>Horário</b></td><td>Entre 8h e 10h, dia útil</td><td>É quando o decisor abre o app, antes da agenda começar.</td></tr>
+          <tr><td><b>Primeira hora</b></td><td>Responder todos os comentários</td><td>O alcance é decidido nos primeiros 60 a 90 minutos. Resposta gera nova interação.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Instagram</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Elemento</th><th>Regra</th></tr></thead>
+        <tbody>
+          <tr><td><b>Formato padrão</b></td><td>Carrossel de 5 a 7 cards. O primeiro card é o gancho e precisa fazer sentido isolado.</td></tr>
+          <tr><td><b>Texto no card</b></td><td>No máximo 20 palavras por card. Fonte grande. Nada de parágrafo dentro da imagem.</td></tr>
+          <tr><td><b>Último card</b></td><td>Sempre com convite: salvar, comentar ou ir ao link da bio.</td></tr>
+          <tr><td><b>Legenda</b></td><td>Resumo do raciocínio em 3 a 5 linhas — não repetir os cards palavra por palavra.</td></tr>
+          <tr><td><b>Stories</b></td><td>Republicar o carrossel no story no mesmo dia, com enquete ou caixinha de pergunta.</td></tr>
+          <tr><td><b>Link</b></td><td>Sempre na bio. Instagram não permite link clicável na legenda.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tom de voz</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Faz</th><th>Não faz</th></tr></thead>
+        <tbody>
+          <tr><td>Nomear o problema com precisão, antes de qualquer solução</td><td>Abrir com "você sabia que 70% dos projetos falham?"</td></tr>
+          <tr><td>Dar critério, número e exemplo concreto</td><td>Falar em "excelência", "sinergia", "transformação"</td></tr>
+          <tr><td>Assumir erro próprio quando couber</td><td>Posar de quem nunca errou</td></tr>
+          <tr><td>Dizer para quem a Obliant <i>não</i> serve</td><td>Prometer resultado que não se mede</td></tr>
+          <tr><td>Escrever como quem opera</td><td>Escrever como quem vende</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Hashtags</h3>
+    <p class="nota">Fixas em todos os posts do LinkedIn: <b>#gestãodeprojetos #PMO #governança</b>. Variáveis conforme o tema: <b>#portfólio #PMGO #gestãodeportfólio #escritóriodeprojetos #gestãoderiscos #agilidade</b>.</p>
+
+    <h3>Checklist antes de publicar</h3>
+    <ul class="checklist">
+      <li>As duas primeiras linhas fazem sentido sozinhas e param a rolagem</li>
+      <li>Não há nenhum número ou caso que não seja verdade sobre a Obliant</li>
+      <li>O post termina com pergunta específica, não com "e você, o que acha?"</li>
+      <li>Nenhum link no corpo — está no primeiro comentário</li>
+      <li>3 a 5 hashtags ao final</li>
+      <li>As três republicações nos perfis pessoais estão combinadas para o mesmo dia</li>
+      <li>Alguém da squad está disponível na primeira hora para responder comentários</li>
+    </ul>
+  </div>
+
+  <!-- ============ VÍDEO E CASES ============ -->
+  <div class="section" id="video">
+    <h2>Vídeo e cases</h2>
+    <p class="section-sub">São os dois formatos de maior retorno em B2B — e os dois que mais ficam de fora dos calendários, porque exigem preparação. Por isso entram aqui como plano próprio, e não como "quando der".</p>
+
+    <h3>Vídeo</h3>
+    <p class="nota" style="margin-top:0">Vídeo curto no LinkedIn cria algo que texto não cria: <b>reconhecimento de rosto</b>. Depois de três ou quatro aparições, o decisor já "conhece" quem fala — e conhecer reduz a barreira da primeira conversa. Vale mais para a Obliant do que qualquer ganho de alcance.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Formato</th><th>Como é</th><th>Quando usar</th></tr></thead>
+        <tbody>
+          <tr><td><b>Resposta direta</b><br><span style="font-size:11.5px;color:var(--muted)">60 a 90 segundos</span></td><td>Uma pessoa, celular na horizontal, respondendo <b>uma</b> pergunta. Sem introdução, sem "oi pessoal". Começa pela resposta.</td><td>Conteúdo de método que já funcionou em texto. Reaproveita o raciocínio, muda o formato.</td></tr>
+          <tr><td><b>Bastidor</b><br><span style="font-size:11.5px;color:var(--muted)">30 a 60 segundos</span></td><td>Squad em reunião, quadro sendo atualizado, daily acontecendo. Legendado, porque roda sem som.</td><td>Instagram, principalmente. Humaniza o perfil e é o mais barato de produzir.</td></tr>
+          <tr><td><b>Depoimento de cliente</b><br><span style="font-size:11.5px;color:var(--muted)">40 a 60 segundos</span></td><td>Cliente falando o problema que tinha e o que mudou. Uma pergunta só, resposta espontânea.</td><td>É o conteúdo de maior conversão do calendário inteiro. Depende de aprovação.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top:18px">
+      <b class="lbl">Regras que decidem se o vídeo funciona</b>
+      <p><b>Legenda queimada, sempre.</b> A maior parte assiste sem som. Vídeo sem legenda em B2B é vídeo não assistido.</p>
+      <p><b>Os 3 primeiros segundos são o gancho.</b> Comece pela frase mais forte, não pela apresentação. "Contratar mais gente não resolve projeto atrasado" antes de "oi, eu sou a Juliana".</p>
+      <p><b>Sem produção.</b> Celular, luz de janela, uma tomada. Vídeo muito produzido em B2B soa a propaganda e reduz a confiança. Vídeo simples soa a especialista.</p>
+      <p><b>Suba nativo.</b> Vídeo publicado direto no LinkedIn tem alcance; link de YouTube não.</p>
+    </div>
+
+    <p class="nota"><b>Cadência sugerida:</b> um vídeo a cada duas semanas, substituindo o post de terça. Não é conteúdo extra — é o mesmo post, em outro formato. Bons candidatos já no calendário: <b>25/08</b> (os três tipos de PMO), <b>15/09</b> (governança x burocracia) e <b>16/09</b> (a daily de 10 minutos, este para o Instagram).</p>
+
+    <h3>Cases</h3>
+    <p class="nota" style="margin-top:0">Case é o ativo mais forte e o mais lento de conseguir, porque depende de aprovação de cliente. Entre o pedido e o aceite costumam passar semanas — por isso <b>o pedido precisa sair agora</b>, mesmo que o case só seja publicado em outubro.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Bloco</th><th>O que entra</th></tr></thead>
+        <tbody>
+          <tr><td><b>1. Situação</b></td><td>Porte e setor da empresa, e o problema em uma frase. Sem adjetivo — "42 projetos abertos, nenhuma lista única" vale mais que "cenário desafiador".</td></tr>
+          <tr><td><b>2. O que foi feito</b></td><td>Três a cinco ações concretas. É a parte que prova método, não esforço.</td></tr>
+          <tr><td><b>3. Resultado</b></td><td>Pelo menos um número, com o antes e o depois. Sem número, não é case — é depoimento.</td></tr>
+          <tr><td><b>4. O que não resolvemos</b></td><td>Opcional e poderoso. Case sem limite soa a folheto; case com limite soa a relato.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warn" style="margin-top:18px">
+      <b class="lbl">Se ainda não houver case aprovado</b>
+      <p>Duas saídas legítimas, nessa ordem:</p>
+      <p><b>1. Case anonimizado.</b> "Uma indústria de médio porte do setor X." Preserva o cliente e mantém os números. Ainda assim, <b>peça autorização</b> — mesmo sem nome, o cliente costuma se reconhecer.</p>
+      <p><b>2. Case interno.</b> O que a própria squad fez com o próprio portfólio. É o post de 22/09 deste calendário. Menos forte que case de cliente, mas verdadeiro e disponível hoje.</p>
+      <p>O que não vale: case genérico, com número redondo e sem origem. Um decisor experiente identifica em dez segundos, e o custo é a credibilidade de tudo que veio antes.</p>
+    </div>
+
+    <p class="nota"><b>Próximo passo concreto:</b> escolher dois clientes com resultado demonstrável e pedir autorização esta semana. Se um dos dois aceitar gravar 40 segundos em vídeo, esse vira o post mais forte do trimestre — e o lugar dele já está reservado na semana de <b>20 a 22/10</b>.</p>
+  </div>
+
+  <!-- ============ AGOSTO ============ -->
+  <div class="section" id="agosto">
+    <h2>Agosto — construir reconhecimento</h2>
+    <p class="section-sub">O objetivo do primeiro mês não é gerar lead, é fazer o decisor parar no post. Peso em <b>Sintoma</b>, nenhuma oferta.</p>
+
+    <!-- SEMANA 1 -->
+    <div class="week">
+      <div class="week-head"><b>Semana 1 · 11 a 13/08</b><span>Abertura — o problema, não a empresa</span></div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Ter 11/08</span><span class="rede li">LinkedIn</span><span class="tag">Sintoma</span></div>
+          <h4>"Está tudo verde" até o dia em que estoura</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">Todo status report da empresa está verde. Aí, na semana da entrega, o projeto estoura em três meses.
+
+Não é má-fé. É que o farol virou opinião.
+
+Quando não existe critério objetivo, o amarelo depende da coragem de quem preenche. E ninguém quer ser a pessoa que levou a má notícia para a diretoria numa quarta-feira de manhã.
+
+O resultado é previsível: o vermelho só aparece quando já não dá para esconder — que é exatamente quando já não dá para corrigir.
+
+Farol útil tem regra antes de ter cor. Por exemplo:
+
+🟢 desvio de prazo até 5% e nenhum risco alto em aberto
+🟡 desvio entre 5% e 15%, ou risco alto com plano de resposta
+🔴 desvio acima de 15%, ou risco alto sem plano
+
+Os limites podem ser outros. O que não pode é a cor depender de quem preencheu.
+
+Na sua empresa, o farol é regra ou é percepção?
+
+#gestãodeprojetos #PMO #governança #gestãoderiscos</p>
+          <p class="nota-post">Post de abertura do calendário. Escolhido porque o sintoma é universal e a solução é concreta o bastante para gerar comentário de quem vive isso. Retomado em 03/09 com o critério completo.</p>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qua 12/08</span><span class="rede ig">Instagram</span><span class="tag">Prova</span></div>
+          <h4>Quem é a squad Omnichannel</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Legenda</p>
+          <p class="copy">Somos a squad Omnichannel da Obliant.
+
+Nosso trabalho é fazer com que quem precisa de governança de projetos encontre a Obliant — e entenda, em poucos minutos, se somos a resposta certa.
+
+A partir de hoje, vamos publicar aqui o que aprendemos operando PMO na prática. O que funciona, o que não funciona e o que a gente erra.
+
+Sem receita pronta. Com método.
+
+Vem com a gente.
+
+#gestãodeprojetos #PMO #governança</p>
+          <p class="rotulo" style="margin-top:16px">Cards do carrossel</p>
+          <ul class="cards">
+            <li><b>1 —</b> "Squad Omnichannel" + logo</li>
+            <li><b>2 —</b> Foto do time (ou três fotos individuais com nome e função)</li>
+            <li><b>3 —</b> "O que fazemos aqui" — governança de projetos, na prática</li>
+            <li><b>4 —</b> "O que você vai ver" — método, bastidor e o que aprendemos errando</li>
+            <li><b>5 —</b> "Vem com a gente" + convite para seguir</li>
+          </ul>
+          <p class="nota-post">Post de apresentação. Vai antes de qualquer conteúdo de método porque dá rosto ao perfil — perfil sem gente por trás não gera confiança em B2B.</p>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qui 13/08</span><span class="rede li">LinkedIn</span><span class="tag">Sintoma</span></div>
+          <h4>A pergunta que trava a diretoria: "como está o portfólio?"</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">A diretoria pergunta: "como está o portfólio?"
+
+E a resposta leva uma semana.
+
+Alguém puxa planilha de três áreas. Outro pede atualização por e-mail. Um terceiro consolida. Na sexta o material fica pronto — e já está desatualizado.
+
+O problema não é o relatório. É não existir uma fonte única que já esteja certa quando a pergunta chega.
+
+Empresa com governança madura responde isso em minutos, porque o dado nasce atualizado dentro da operação. Não é remontado sob demanda.
+
+A diferença prática é grande: quando a resposta custa uma semana de trabalho, a diretoria pergunta uma vez por trimestre. E decide o resto do tempo sem informação.
+
+Quanto tempo leva, aí, entre a pergunta e a resposta?
+
+#gestãodeprojetos #PMO #gestãodeportfólio #governança</p>
+          <p class="nota-post">Conecta direto com a persona Diretor(a) de Operações/TI. O ângulo final — "decide o resto do tempo sem informação" — é o que transforma um incômodo operacional em problema de diretoria.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 2 -->
+    <div class="week">
+      <div class="week-head"><b>Semana 2 · 18 a 20/08</b><span>Começar a mostrar como se resolve</span></div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Ter 18/08</span><span class="rede li">LinkedIn</span><span class="tag">Método</span></div>
+          <h4>O que um PMO faz de verdade — e o que ele não é</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">"PMO é quem cobra prazo."
+
+Essa é a definição mais comum — e a razão de tanta resistência quando a empresa decide montar um.
+
+PMO que só cobra prazo é overhead. Vira mais uma reunião, mais uma planilha, mais um e-mail. E a operação, com razão, passa a evitá-lo.
+
+O que um PMO entrega quando é bem desenhado:
+
+▸ Decide o que não vai ser feito. Priorização é a função mais impopular e a mais valiosa.
+
+▸ Torna o status confiável. Não é reportar mais, é reportar com critério.
+
+▸ Destrava dependência. A maior parte do atraso não está dentro do projeto — está entre projetos.
+
+▸ Mede benefício, não só entrega. Escopo cumprido não é sinônimo de problema resolvido.
+
+Repare que nenhum desses itens é "cobrar". Se o seu PMO faz só isso, o problema não é o PMO. É o mandato que deram a ele.
+
+O que o seu PMO tem autoridade para decidir sozinho?
+
+#gestãodeprojetos #PMO #governança</p>
+          <p class="nota-post">Enfrenta a objeção mais comum de frente. O fecho — "é o mandato que deram a ele" — costuma render comentário de quem está do lado de dentro e se sente descrito.</p>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qua 19/08</span><span class="rede ig">Instagram</span><span class="tag">Método</span></div>
+          <h4>Carrossel: PMO não é isso, é aquilo</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Legenda</p>
+          <p class="copy">A maior parte da resistência a PMO vem de uma definição errada.
+
+Se PMO, na sua empresa, é quem cobra prazo e pede atualização de planilha, a resistência faz sentido — isso é overhead.
+
+Deslize para ver o que muda quando o PMO é desenhado para decidir, e não para cobrar.
+
+Salva aí para a próxima vez que alguém disser que PMO é burocracia.
+
+#gestãodeprojetos #PMO #governança</p>
+          <p class="rotulo" style="margin-top:16px">Cards do carrossel</p>
+          <ul class="cards">
+            <li><b>1 —</b> "PMO não é o que você pensa"</li>
+            <li><b>2 —</b> NÃO é quem cobra prazo · É quem define o que <i>não</i> será feito</li>
+            <li><b>3 —</b> NÃO é quem preenche planilha · É quem torna o status confiável</li>
+            <li><b>4 —</b> NÃO é mais uma reunião · É quem destrava dependência entre áreas</li>
+            <li><b>5 —</b> NÃO é quem entrega escopo · É quem mede se o problema foi resolvido</li>
+            <li><b>6 —</b> "Se o seu PMO só cobra, o problema é o mandato" + convite para salvar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qui 20/08</span><span class="rede li">LinkedIn</span><span class="tag">Sintoma</span></div>
+          <h4>Contratar mais gente não resolve projeto atrasado</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">O projeto atrasou. A primeira reação é pedir mais gente.
+
+Quase nunca funciona.
+
+Projeto atrasa por três motivos, e só um deles se resolve com pessoas:
+
+1. Falta de capacidade. Aqui, sim, mais gente ajuda.
+
+2. Falta de decisão. Alguém precisa escolher entre A e B e não escolhe. Mais gente só aumenta a fila de espera pela mesma decisão.
+
+3. Falta de clareza. O time não sabe o que é "pronto". Mais gente multiplica o retrabalho.
+
+Nos casos 2 e 3, adicionar pessoas piora a situação: aumenta o custo de coordenação sem aumentar a vazão.
+
+E o diagnóstico é barato. Antes de abrir vaga ou contratar consultoria, vale a pergunta mais simples do projeto:
+
+o que está travado é braço, decisão ou clareza?
+
+Na última vez que um projeto atrasou aí, qual dos três era?
+
+#gestãodeprojetos #PMO #governança</p>
+          <p class="nota-post">Formato de lista curta com uma pergunta diagnóstica ao final. É o tipo de post que gera comentário porque a pessoa consegue responder em uma palavra.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 3 -->
+    <div class="week">
+      <div class="week-head"><b>Semana 3 · 25 a 27/08</b><span>Diferenciar os tipos de PMO</span></div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Ter 25/08</span><span class="rede li">LinkedIn</span><span class="tag">Método</span></div>
+          <h4>PMO Executivo, de Implantação ou Ágil — qual é o seu caso</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">"Quero montar um PMO" quase nunca significa a mesma coisa para duas empresas.
+
+São três problemas diferentes, e cada um pede um desenho diferente.
+
+<b>PMO Executivo</b>
+A diretoria não enxerga o portfólio. Sabe que existem projetos, mas não sabe quais valem, quanto custam, nem quais deveriam parar. Aqui o PMO serve à decisão de investimento.
+
+<b>PMO de Implantação</b>
+A empresa vai tocar algo grande — um ERP, uma fusão, uma expansão — e não tem estrutura para conduzir. É temporário por natureza: tem começo, meio e fim.
+
+<b>PMO Ágil</b>
+Os times já operam em ciclos curtos e a governança tradicional atrapalha mais do que ajuda. Aqui o PMO cuida de fluxo e dependência, não de cronograma.
+
+O erro caro é montar um quando o problema pedia outro.
+
+PMO Executivo em empresa que precisava de implantação vira relatório bonito sem execução. PMO de Implantação em empresa que precisava de visão executiva resolve um projeto e deixa o portfólio exatamente como estava.
+
+Qual dos três descreve a sua empresa hoje?
+
+#gestãodeprojetos #PMO #governança #escritóriodeprojetos</p>
+          <p class="nota-post">Post-âncora do mês. É o conteúdo mais salvo e o que melhor qualifica: quem responde "o segundo" está se identificando com um produto específico do portfólio.</p>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qua 26/08</span><span class="rede ig">Instagram</span><span class="tag">Método</span></div>
+          <h4>Carrossel: os três tipos de PMO</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Legenda</p>
+          <p class="copy">Montar o PMO errado custa caro — e o erro só aparece meses depois.
+
+São três desenhos diferentes para três problemas diferentes. Deslize para descobrir qual descreve a sua empresa.
+
+Comenta aí o número que mais parece com a sua realidade.
+
+#gestãodeprojetos #PMO #escritóriodeprojetos</p>
+          <p class="rotulo" style="margin-top:16px">Cards do carrossel</p>
+          <ul class="cards">
+            <li><b>1 —</b> "Três tipos de PMO. Qual é o seu?"</li>
+            <li><b>2 —</b> PMO Executivo · Use quando a diretoria não enxerga o portfólio</li>
+            <li><b>3 —</b> PMO de Implantação · Use quando há um projeto grande e nenhuma estrutura</li>
+            <li><b>4 —</b> PMO Ágil · Use quando a governança tradicional trava os times</li>
+            <li><b>5 —</b> "O erro caro é montar um quando o problema pedia outro"</li>
+            <li><b>6 —</b> "Qual é o seu caso?" + convite para comentar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qui 27/08</span><span class="rede li">LinkedIn</span><span class="tag">Sintoma</span></div>
+          <h4>O projeto acabou. Alguém mediu se deu certo?</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">O projeto entregou tudo que estava no escopo, no prazo e dentro do orçamento.
+
+Seis meses depois, ninguém sabe dizer se resolveu o problema que motivou o investimento.
+
+Isso é mais comum que atraso — e muito menos discutido, porque não gera crise. O projeto foi encerrado em verde. A ata está assinada. E o indicador que justificou o investimento continua igual.
+
+Encerramento sério tem duas perguntas, não uma:
+
+▸ Entregamos o que combinamos? (escopo)
+▸ O que motivou isso melhorou? (benefício)
+
+A segunda quase nunca é feita, porque exige ter medido antes — e ter definido, no kickoff, qual número deveria mudar.
+
+Se ninguém definiu esse número no início, não dá para responder no fim. E aí o projeto passa a existir só como custo.
+
+Nos últimos projetos aí, alguém respondeu a segunda pergunta?
+
+#gestãodeprojetos #PMO #governança #gestãodeportfólio</p>
+          <p class="nota-post">Fecha agosto com o sintoma mais estratégico da série — é o que conecta projeto com decisão de investimento, linguagem da diretoria.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SETEMBRO ============ -->
+  <div class="section" id="setembro">
+    <h2>Setembro — autoridade e método</h2>
+    <p class="section-sub">Com o reconhecimento iniciado, o peso vira <b>Método</b>. É o mês de provar que a Obliant sabe operar, não só diagnosticar. A primeira oferta aparece na semana 7.</p>
+
+    <!-- SEMANA 4 -->
+    <div class="week">
+      <div class="week-head"><b>Semana 4 · 01 a 03/09</b><span>Indicadores</span></div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Ter 01/09</span><span class="rede li">LinkedIn</span><span class="tag">Método</span></div>
+          <h4>Três indicadores que substituem um relatório de 40 páginas</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">Relatório de status de 40 páginas que ninguém lê inteiro.
+
+Três indicadores resolvem melhor.
+
+<b>1. Desvio de prazo (%)</b>
+(previsto − realizado) ÷ previsto. Um número por projeto. Mostra se o cronograma ainda é plano ou já virou ficção.
+
+<b>2. Riscos altos sem plano de resposta</b>
+Contagem simples. Risco alto mapeado e sem plano é o que vira crise no mês seguinte. Se esse número não for zero, ele é a pauta da reunião.
+
+<b>3. Decisões pendentes há mais de 15 dias</b>
+O mais subestimado dos três. A maior parte do atraso não é execução lenta — é decisão parada. Este número mostra exatamente onde.
+
+Três números, uma tela.
+
+Se a reunião de status precisa de mais que isso para acontecer, o problema não é falta de informação. É falta de critério sobre o que olhar.
+
+Qual desses três a sua empresa acompanha hoje?
+
+#gestãodeprojetos #PMO #governança #gestãoderiscos</p>
+          <p class="nota-post">Conteúdo prático e específico — o tipo que o gerente de projetos salva e leva para a própria reunião. Alto potencial de salvamento.</p>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qua 02/09</span><span class="rede ig">Instagram</span><span class="tag">Prova</span></div>
+          <h4>Bastidor: o farol da nossa própria squad</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Legenda</p>
+          <p class="copy">Esse é o status semanal real da nossa squad. Inclusive o vermelho.
+
+A gente fala aqui que farol precisa de critério e que vermelho não pode ser punição. Então mostramos o nosso.
+
+Vermelho não significa que o time falhou. Significa que algo estourou o limite e precisa de decisão — e que a decisão vai ser tomada essa semana, não no fim do mês.
+
+Governança que só mostra o que está bonito não é governança. É apresentação.
+
+#gestãodeprojetos #PMO #governança</p>
+          <p class="rotulo" style="margin-top:16px">Formato</p>
+          <ul class="cards">
+            <li>Print do quadro de status da squad, com os dados sensíveis borrados se houver</li>
+            <li>Ou um card recriando o farol da semana, com os três indicadores visíveis</li>
+          </ul>
+          <p class="nota-post">Transparência gera mais confiança do que vitrine. Mostrar o vermelho é o que dá credibilidade ao discurso de método das semanas anteriores.</p>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qui 03/09</span><span class="rede li">LinkedIn</span><span class="tag">Método</span></div>
+          <h4>Farol de projeto: defina o critério antes da opinião</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">Há três semanas escrevi aqui que farol de projeto vira teatro quando a cor depende de quem preenche.
+
+Perguntaram qual é o critério. Segue o que usamos.
+
+A regra de base: <b>a cor é calculada, não opinada.</b> Quem preenche informa dados. A cor sai deles.
+
+🟢 Verde — desvio de prazo até 5%, nenhum risco alto sem plano, nenhuma decisão parada há mais de 15 dias
+
+🟡 Amarelo — qualquer um dos três estourado, com plano de recuperação registrado
+
+🔴 Vermelho — qualquer um dos três estourado, sem plano
+
+Os limites podem ser outros na sua empresa. Duas regras, porém, não mudam:
+
+▸ Vermelho não pode ser punição. Se virar, ninguém reporta e o farol volta a ser teatro.
+
+▸ A reunião começa pelos vermelhos. Se começa pelos verdes, o incentivo é pintar de verde.
+
+O critério é a parte fácil. A cultura de aceitar o vermelho é a parte difícil — e é ela que decide se funciona.
+
+Na sua empresa, alguém já foi cobrado por reportar vermelho?
+
+#gestãodeprojetos #PMO #governança #gestãoderiscos</p>
+          <p class="nota-post">Fecha o arco aberto em 11/08. Citar o post anterior cria continuidade e sinaliza para o algoritmo e para o leitor que existe uma linha de raciocínio, não posts avulsos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 5 -->
+    <div class="week">
+      <div class="week-head"><b>Semana 5 · 08 a 10/09</b><span>Priorização de portfólio</span></div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Ter 08/09</span><span class="rede li">LinkedIn</span><span class="tag">Sintoma</span></div>
+          <h4>Quantos projetos a sua empresa tem abertos agora?</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">Pergunta simples: quantos projetos a sua empresa tem abertos neste momento?
+
+Na maioria das empresas de porte médio, três pessoas dão três respostas diferentes. E as três estão parcialmente certas — cada uma enxerga a própria fatia.
+
+Isso acontece porque projeto nasce em qualquer lugar. Uma demanda de cliente. Uma exigência regulatória. Uma ideia da diretoria. Um pedido de TI. Cada um entra por uma porta diferente e nenhum passa por um mesmo lugar.
+
+O sintoma não é a lista errada. São as consequências dela:
+
+▸ duas áreas tocando a mesma coisa sem saber
+▸ projeto vivo há dois anos que ninguém tem coragem de encerrar
+▸ a mesma pessoa alocada em cinco frentes ao mesmo tempo
+
+Antes de qualquer método de priorização, existe um passo mais chato e mais urgente: fazer a lista. Uma só, com dono e status, mesmo que imperfeita no primeiro mês.
+
+Não dá para priorizar o que ninguém consegue enumerar.
+
+Você conseguiria listar os projetos da sua empresa agora, de cabeça?
+
+#gestãodeprojetos #gestãodeportfólio #PMO #governança</p>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qua 09/09</span><span class="rede ig">Instagram</span><span class="tag">Sintoma</span></div>
+          <h4>Card + enquete: sua empresa sabe quantos projetos tem?</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Legenda</p>
+          <p class="copy">Pergunta que parece básica e quase nunca tem resposta pronta.
+
+Se três pessoas da sua empresa derem três números diferentes, não é falha de ninguém — é sinal de que os projetos nascem em portas diferentes e não passam por um lugar comum.
+
+E não dá para priorizar o que ninguém consegue enumerar.
+
+Responde na enquete do story. 👆
+
+#gestãodeprojetos #gestãodeportfólio #PMO</p>
+          <p class="rotulo" style="margin-top:16px">Formato</p>
+          <ul class="cards">
+            <li>Card único, tipográfico, com a pergunta grande: <b>"Quantos projetos a sua empresa tem abertos hoje?"</b></li>
+            <li>Story no mesmo dia com enquete: "Sei de cabeça / Precisaria consultar / Ninguém sabe"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qui 10/09</span><span class="rede li">LinkedIn</span><span class="tag">Método</span></div>
+          <h4>Por que a matriz de priorização morre em três meses</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">Toda empresa que faz matriz de priorização passa pelo mesmo ciclo.
+
+Monta a planilha. Prioriza tudo. Sente-se organizada. E três meses depois a planilha está morta.
+
+O que mata não é o método. São três coisas:
+
+<b>1. Priorizar sem cortar.</b>
+Se a matriz classifica 40 projetos e os 40 continuam abertos, ela não priorizou — só ordenou. Priorização que não interrompe nada não é priorização.
+
+<b>2. Nota dada por quem defende o projeto.</b>
+Ninguém dá nota baixa para a própria iniciativa. A pontuação precisa sair de um fórum com gente de áreas diferentes, não de um formulário enviado por e-mail.
+
+<b>3. Nenhuma cadência de revisão.</b>
+O contexto muda. Sem revisão mensal, a ordem definida em janeiro guia a execução de agosto.
+
+A matriz GUT funciona bem para isso — gravidade, urgência, tendência. Mas o método é a parte mais fácil da lista. As três armadilhas acima são de processo e de coragem.
+
+Quantos projetos a sua última priorização interrompeu?
+
+#gestãodeprojetos #gestãodeportfólio #PMO #governança</p>
+          <p class="nota-post">A pergunta final é desconfortável de propósito. Quem responde "nenhum" acabou de diagnosticar o próprio problema — e é exatamente esse o leitor que a Obliant quer.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 6 -->
+    <div class="week">
+      <div class="week-head"><b>Semana 6 · 15 a 17/09</b><span>Governança x burocracia</span></div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Ter 15/09</span><span class="rede li">LinkedIn</span><span class="tag">Método</span></div>
+          <h4>Governança não é burocracia — a diferença está em quem decide</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">"Não quero governança, quero velocidade."
+
+É uma objeção legítima. Na maior parte das empresas, governança foi implantada como burocracia mesmo.
+
+A diferença entre as duas cabe em uma frase:
+
+<b>burocracia adiciona etapas. Governança adiciona clareza sobre quem decide.</b>
+
+Na prática, para uma mudança de escopo:
+
+Burocracia — preencha o formulário, aguarde o comitê, que se reúne quinzenalmente.
+
+Governança — mudanças até X% do orçamento, o gerente decide sozinho e comunica. Acima disso, sobe para o comitê.
+
+A segunda é mais rápida até do que não ter regra nenhuma. Porque sem regra, toda mudança vira negociação política e fica esperando pela pessoa mais ocupada da empresa.
+
+Governança bem-feita não é o freio. É saber, de antemão, quem pode dizer sim.
+
+Na sua empresa, quem pode aprovar uma mudança de escopo sem convocar reunião?
+
+#gestãodeprojetos #PMO #governança</p>
+          <p class="nota-post">Enfrenta a objeção número um de quem resiste a PMO. Posts que nomeiam uma objeção real rendem comentário de decisor com mais frequência que posts de método puro.</p>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qua 16/09</span><span class="rede ig">Instagram</span><span class="tag">Prova</span></div>
+          <h4>Como é uma daily de 10 minutos</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Legenda</p>
+          <p class="copy">Dez minutos. Três perguntas. Sem resolver problema.
+
+Essa é a nossa daily — e a regra mais importante dela é a última: trava não vira debate. Vira tarefa com nome e data, tratada depois.
+
+Reunião de dez minutos que decide vale mais que reunião de duas horas que informa.
+
+Deslize para ver como funciona.
+
+#gestãodeprojetos #PMO #agilidade</p>
+          <p class="rotulo" style="margin-top:16px">Cards do carrossel</p>
+          <ul class="cards">
+            <li><b>1 —</b> "Nossa daily dura 10 minutos"</li>
+            <li><b>2 —</b> Pergunta 1: o que eu fiz</li>
+            <li><b>3 —</b> Pergunta 2: o que eu vou fazer</li>
+            <li><b>4 —</b> Pergunta 3: o que está travado</li>
+            <li><b>5 —</b> "A regra que faz caber em 10 min: trava não vira debate, vira tarefa"</li>
+            <li><b>6 —</b> Convite para salvar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qui 17/09</span><span class="rede li">LinkedIn</span><span class="tag">Sintoma</span></div>
+          <h4>A reunião de status de duas horas que não decide nada</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">Reunião de status semanal. Duas horas. Doze pessoas. Cada uma fala cinco minutos sobre o que fez.
+
+Ao final, nenhuma decisão foi tomada.
+
+O erro está no desenho: a reunião foi montada para <b>informar</b>. E informação não precisa de reunião — precisa de um lugar onde esteja atualizada.
+
+Reunião existe para o que só acontece com as pessoas juntas: decidir, escolher entre alternativas, destravar dependência.
+
+O desenho que funciona:
+
+▸ Status por escrito, publicado antes. Quem não leu não participa.
+▸ A pauta é a lista de decisões pendentes — não a lista de projetos.
+▸ Trava sem dono ao final vira tarefa com nome e data.
+▸ Trinta minutos. Se acabar em quinze, acabou.
+
+E vale fazer a conta antes da próxima. Doze pessoas, duas horas, toda semana, o ano inteiro.
+
+Quanto custa por ano a reunião que só informa?
+
+#gestãodeprojetos #PMO #governança</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 7 -->
+    <div class="week">
+      <div class="week-head"><b>Semana 7 · 22 a 24/09</b><span>Prova e primeira oferta</span></div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Ter 22/09</span><span class="rede li">LinkedIn</span><span class="tag">Prova</span></div>
+          <h4>Como cortamos o nosso próprio portfólio</h4>
+        </div>
+        <div class="post-body">
+          <div class="callout warn" style="margin-bottom:14px">
+            <b class="lbl">Preencher antes de publicar</b>
+            <p>Este é o único post do calendário com números que eu não tenho. Substitua os campos entre colchetes pelos dados reais do portfólio da squad — ou troque por um caso de cliente, se houver um aprovado para divulgação. <b>Não publique com número estimado.</b></p>
+          </div>
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">A gente escreve aqui sobre priorização há três semanas. Justo mostrar como fizemos em casa.
+
+Começamos o trimestre com [X] iniciativas mapeadas. Hoje são [Y] ativas.
+
+O corte não foi por orçamento. Foi por uma pergunta só, aplicada a cada item:
+
+<b>se isso não acontecer neste trimestre, o que deixa de melhorar?</b>
+
+O que não teve resposta clara saiu — não para o lixo, para uma lista chamada Roadmap Futuro. Continua visível, continua rastreável, mas não consome atenção nem gente agora.
+
+O que aprendemos no processo:
+
+▸ [Aprendizado 1 — algo concreto que surpreendeu]
+▸ [Aprendizado 2]
+▸ O mais difícil não foi escolher o que fica. Foi aceitar que o que sai não vai voltar tão cedo.
+
+Priorização só é real quando alguma coisa para.
+
+Quando foi a última vez que a sua empresa interrompeu um projeto de propósito?
+
+#gestãodeprojetos #gestãodeportfólio #PMO</p>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qua 23/09</span><span class="rede ig">Instagram</span><span class="tag">Oferta</span></div>
+          <h4>Card: o que é PMGO</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Legenda</p>
+          <p class="copy">Governança de projetos como serviço recorrente.
+
+Em vez de montar um PMO interno — contratar, treinar, estruturar método e esperar um ano até maturar — a Obliant opera essa camada para a sua empresa.
+
+Isso é PMGO.
+
+Link na bio para entender como funciona.
+
+#gestãodeprojetos #PMGO #PMO #governança</p>
+          <p class="rotulo" style="margin-top:16px">Cards do carrossel</p>
+          <ul class="cards">
+            <li><b>1 —</b> "PMGO — governança de projetos como serviço"</li>
+            <li><b>2 —</b> Portfólio único, com status confiável</li>
+            <li><b>3 —</b> Rituais de decisão desenhados e conduzidos</li>
+            <li><b>4 —</b> Indicadores de prazo, risco e decisão pendente</li>
+            <li><b>5 —</b> "Sem montar time interno" + link na bio</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qui 24/09</span><span class="rede li">LinkedIn</span><span class="tag">Oferta</span></div>
+          <h4>PMGO: governança recorrente sem montar time interno</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">Depois de seis semanas escrevendo aqui sobre governança, cabe dizer o que a Obliant faz.
+
+<b>PMGO — governança de projetos como serviço recorrente.</b>
+
+Em vez de a empresa montar um PMO interno — contratar, treinar, estruturar método, esperar doze meses até maturar — a Obliant opera essa camada.
+
+Na prática:
+
+▸ Portfólio único, com status confiável e sempre atualizado
+▸ Rituais de decisão desenhados e conduzidos
+▸ Indicadores de prazo, risco e decisão pendente
+▸ Escalonamento para a diretoria quando algo trava
+
+<b>Para quem faz sentido:</b> empresa com projetos suficientes para precisar de governança, mas não a ponto de justificar uma estrutura própria dedicada.
+
+<b>Para quem não faz:</b> empresa com PMO maduro já rodando. Nesse caso o que ajuda é revisão pontual, não substituição.
+
+Se a pergunta "como está o portfólio?" ainda leva uma semana para ser respondida aí, vale uma conversa. Comenta abaixo ou manda mensagem.
+
+#gestãodeprojetos #PMGO #PMO #governança</p>
+          <p class="nota-post">Primeira oferta explícita do calendário, na sétima semana. Dizer para quem <i>não</i> serve é o que faz a oferta soar honesta — e qualifica quem chega.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMANA 8 -->
+    <div class="week">
+      <div class="week-head"><b>Semana 8 · 29/09 a 01/10</b><span>Fechamento de trimestre</span></div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Ter 29/09</span><span class="rede li">LinkedIn</span><span class="tag">Sintoma</span></div>
+          <h4>Fecha o trimestre: o que entregamos — e o que aprendemos?</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">Fecha o trimestre e a pergunta padrão é: o que entregamos?
+
+Falta a segunda: o que aprendemos?
+
+Empresa que só mede entrega repete o mesmo erro em três trimestres seguidos, com projetos diferentes. O padrão está lá — atraso sempre no mesmo tipo de dependência, escopo sempre crescendo depois da mesma etapa. Mas ninguém olha o conjunto. Só o item.
+
+Quatro perguntas que cabem em uma hora de fechamento:
+
+▸ Qual projeto atrasou e por qual motivo raiz — não a causa aparente?
+▸ O que interrompemos, e por quê?
+▸ Qual decisão demorou mais do que deveria?
+▸ O que vamos fazer diferente no próximo trimestre — uma coisa só?
+
+A última é a que importa. Fechamento que gera lista de dez melhorias não gera nenhuma.
+
+O seu fechamento de trimestre olha o conjunto, ou projeto por projeto?
+
+#gestãodeprojetos #PMO #governança #gestãodeportfólio</p>
+          <p class="nota-post">Gancho de calendário: fim de Q3 é quando a diretoria olha portfólio. Tema certo na semana certa rende mais que tema bom em semana qualquer.</p>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qua 30/09</span><span class="rede ig">Instagram</span><span class="tag">Método</span></div>
+          <h4>Card: 4 perguntas para o fechamento do trimestre</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Legenda</p>
+          <p class="copy">Fechamento de trimestre que só lista entregas não muda nada no trimestre seguinte.
+
+Quatro perguntas cabem em uma hora e mudam o próximo ciclo.
+
+Salva para usar essa semana.
+
+#gestãodeprojetos #PMO #governança</p>
+          <p class="rotulo" style="margin-top:16px">Cards do carrossel</p>
+          <ul class="cards">
+            <li><b>1 —</b> "4 perguntas para fechar o trimestre"</li>
+            <li><b>2 —</b> Qual projeto atrasou — e por qual motivo raiz?</li>
+            <li><b>3 —</b> O que interrompemos, e por quê?</li>
+            <li><b>4 —</b> Qual decisão demorou mais do que deveria?</li>
+            <li><b>5 —</b> O que faremos diferente — uma coisa só?</li>
+            <li><b>6 —</b> "Lista de dez melhorias não gera nenhuma" + convite para salvar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-head">
+          <div class="post-meta"><span class="dia">Qui 01/10</span><span class="rede li">LinkedIn</span><span class="tag">Método</span></div>
+          <h4>Como montar um plano de Q4 que sobrevive a novembro</h4>
+        </div>
+        <div class="post-body">
+          <p class="rotulo">Texto para publicar</p>
+          <p class="copy">Planejamento de Q4 tem uma armadilha específica: novembro e dezembro têm menos dias úteis do que parecem.
+
+Entre feriados, festas de fim de ano e férias, o quarto trimestre costuma render o equivalente a dois meses de execução — não três. Planos montados como se fossem treze semanas cheias chegam em dezembro com um terço em aberto.
+
+O que fazer com isso:
+
+▸ <b>Conte os dias úteis reais</b> antes de distribuir escopo. Não a quantidade de semanas.
+
+▸ <b>Escolha uma entrega âncora.</b> Uma que precisa acontecer até 30 de novembro, não até 20 de dezembro. Dezembro é para fechar, não para entregar.
+
+▸ <b>Antecipe as decisões de dependência externa.</b> Fornecedor e cliente também entram em modo fim de ano.
+
+▸ <b>Deixe explícito o que fica para janeiro.</b> O que não é dito vira frustração; o que é combinado vira plano.
+
+Q4 bem planejado termina em novembro. O que sobra para dezembro é encerramento e desenho do ano seguinte.
+
+Quantos dias úteis reais o seu Q4 tem?
+
+#gestãodeprojetos #PMO #governança</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OUTUBRO / NOVEMBRO ============ -->
+  <div class="section" id="out-nov">
+    <h2>Outubro e novembro — temas por semana</h2>
+    <p class="section-sub">A partir daqui o calendário fica em nível de tema. A escolha dos ângulos deve considerar o que engajou em agosto e setembro — por isso não faz sentido escrever agora. A proporção muda: mais <b>Prova</b> e mais <b>Oferta</b>.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Semana</th><th>Tema condutor</th><th>Ângulos sugeridos</th></tr></thead>
+        <tbody>
+          <tr><td class="dia">06 a 08/10</td><td><b>Maturidade em governança</b></td><td>Os níveis de maturidade e como identificar o seu · O que muda quando a empresa sai do nível inicial</td></tr>
+          <tr><td class="dia">13 a 15/10</td><td><b>PMO de Implantação</b></td><td>Quando o problema é começar, não manter · Os 90 primeiros dias de um PMO novo</td></tr>
+          <tr><td class="dia">20 a 22/10</td><td><b>Prova e caso</b></td><td>Caso de cliente com número · Depoimento em vídeo curto · O que deu errado e o que mudamos</td></tr>
+          <tr><td class="dia">27 a 29/10</td><td><b>PMO Ágil</b></td><td>Governança em ambiente ágil sem virar cascata disfarçada · Métricas de fluxo x métricas de prazo</td></tr>
+          <tr><td class="dia">03 a 05/11</td><td><b>Planejamento de 2027</b></td><td>Como priorizar o portfólio do ano que vem · O erro de planejar 2027 com a lista de 2026</td></tr>
+          <tr><td class="dia">10 a 12/11</td><td><b>Custo da má governança</b></td><td>Quanto custa um projeto que não termina · O retrabalho que ninguém contabiliza</td></tr>
+          <tr><td class="dia">17 a 19/11</td><td><b>Oferta cheia</b></td><td>PMGO e PMO lado a lado — qual contratar · Como começa um diagnóstico · CTA forte</td></tr>
+          <tr><td class="dia">24 a 26/11</td><td><b>Fechamento e balanço</b></td><td>O que a Obliant aprendeu no trimestre · Convite para conversa sobre 2027</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ============ BANCO DE TEMAS ============ -->
+  <div class="section" id="banco">
+    <h2>Banco de temas</h2>
+    <p class="section-sub">Para quando a semana apertar, um post precisar ser trocado, ou for hora de desdobrar outubro e novembro. Todos já alinhados aos produtos da Fase 1.</p>
+
+    <div class="banco">
+      <div class="bloco">
+        <h4>Sintoma</h4>
+        <ul>
+          <li>O gerente de projetos que virou preenchedor de planilha</li>
+          <li>Quando o cronograma existe mas ninguém olha</li>
+          <li>Dois times tocando o mesmo projeto sem saber</li>
+          <li>O projeto que continua vivo porque ninguém teve coragem de encerrar</li>
+          <li>Escopo que cresce sem ninguém aprovar</li>
+          <li>A dependência que só aparece quando trava</li>
+          <li>A pessoa que é gargalo de cinco projetos ao mesmo tempo</li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h4>Método</h4>
+        <ul>
+          <li>Como escrever um status report que cabe em uma tela</li>
+          <li>O que é um bom critério de aceite</li>
+          <li>Gestão de riscos sem planilha de 200 linhas</li>
+          <li>Como fazer o handover de um projeto sem perder contexto</li>
+          <li>Cadência de rituais: diária, semanal e mensal</li>
+          <li>Como medir benefício e não só entrega</li>
+          <li>Comitê de portfólio: quem senta, o que decide, com que frequência</li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h4>Prova</h4>
+        <ul>
+          <li>Como a squad usa o próprio tracker de iniciativas</li>
+          <li>Um erro que cometemos e o que mudamos depois</li>
+          <li>Números do portfólio interno, abertos</li>
+          <li>Depoimento de cliente em vídeo de 40 segundos</li>
+          <li>Antes e depois de um board de projetos</li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h4>Oferta</h4>
+        <ul>
+          <li>PMGO: o que está incluso e o que não está</li>
+          <li>Como funciona o diagnóstico inicial</li>
+          <li>Quanto tempo até o primeiro resultado</li>
+          <li>Para quem a Obliant não é a melhor escolha</li>
+          <li>Como começar com escopo reduzido</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ROTINA ============ -->
+  <div class="section" id="rotina">
+    <h2>Rotina de produção</h2>
+    <p class="section-sub">O calendário só sobrevive se a produção for antecipada. Escrever no dia da publicação é o que faz o conteúdo morrer no segundo mês.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Quando</th><th>O quê</th><th>Quem</th></tr></thead>
+        <tbody>
+          <tr><td><b>Quinta anterior</b></td><td>Adaptar os 3 textos da semana seguinte a partir deste guia</td><td>Isabelle</td></tr>
+          <tr><td><b>Sexta anterior</b></td><td>Revisar e aprovar</td><td>Juliana</td></tr>
+          <tr><td><b>Sexta anterior</b></td><td>Produzir as artes e agendar</td><td>Isabelle</td></tr>
+          <tr><td><b>Dia da publicação, manhã</b></td><td>Republicar no perfil pessoal com comentário próprio</td><td>Juliana, Julia, Isabelle</td></tr>
+          <tr><td><b>Primeira hora após publicar</b></td><td>Responder comentários — é o que decide o alcance</td><td>Quem publicou</td></tr>
+          <tr><td><b>Última sexta do mês</b></td><td>Fechar indicadores e desdobrar os temas do mês seguinte</td><td>Squad</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="nota">Com agosto e setembro já escritos, a carga real da Isabelle nas próximas oito semanas é de adaptação e arte — não de criação. A criação volta a pesar em outubro, quando os temas precisam ser desdobrados.</p>
+  </div>
+
+  <!-- ============ INDICADORES ============ -->
+  <div class="section" id="indicadores">
+    <h2>O que medir</h2>
+    <p class="section-sub">Sem verba, curtida não é indicador — é ruído. O que importa é sinal de decisor e movimento em direção ao site.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Indicador</th><th>Por que importa</th><th>Onde ver</th></tr></thead>
+        <tbody>
+          <tr><td><b>Comentários de decisor</b></td><td>Um comentário de Head ou Diretor vale mais que 200 curtidas. É o sinal de que o tema acertou a persona.</td><td>LinkedIn, contagem manual</td></tr>
+          <tr><td><b>Cliques no site</b></td><td>Único indicador que liga conteúdo a intenção real.</td><td>LinkedIn Analytics · GA4</td></tr>
+          <tr><td><b>Seguidores novos por cargo</b></td><td>Crescer com público fora do perfil-alvo não adianta. O que conta é seguidor no cargo certo.</td><td>LinkedIn Analytics</td></tr>
+          <tr><td><b>Salvamentos</b></td><td>Indica conteúdo de método com valor prático — sinal para produzir mais daquele tipo.</td><td>LinkedIn · Instagram</td></tr>
+          <tr><td><b>Alcance via perfis pessoais</b></td><td>Mede se a regra de republicação está sendo cumprida. Se cair, o calendário perde o motor.</td><td>Comparar impressões da página x dos perfis</td></tr>
+          <tr><td><b>Conversas iniciadas</b></td><td>O único que importa de verdade. Mensagem direta ou contato citando um post.</td><td>Registro manual da squad</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="nota">Fechar esses números na <b>última sexta de cada mês</b>, junto com o desdobramento dos temas do mês seguinte. Sem esse fechamento, o calendário roda no automático e ninguém aprende nada com ele.</p>
+  </div>
+
+  <footer>
+    Squad Omnichannel · Obliant · PE 3Q26 — guia de conteúdo orgânico para LinkedIn e Instagram, de 11 de agosto a 27 de novembro de 2026.<br>
+    24 posts redigidos para agosto e setembro; outubro e novembro em nível de tema. Foco nos produtos da Fase 1 — PMGO e PMO Executivo, de Implantação e Ágil —, alinhado à proposta de tráfego pago. Escritório de Projetos e GMO entram na Fase 2.
+  </footer>
+
+</div>
+</body>
+</html>
