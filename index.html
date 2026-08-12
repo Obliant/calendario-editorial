@@ -116,6 +116,25 @@
 
   .nota{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:14px}
 
+  /* ---------- Abas ---------- */
+  .abas{max-width:880px;margin:0 auto;padding:0 28px;display:flex;gap:6px;border-bottom:1px solid var(--line);margin-top:22px}
+  .abas button{appearance:none;background:transparent;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+    font-family:var(--font-body);font-size:13.5px;font-weight:600;color:var(--muted);padding:11px 16px;cursor:pointer}
+  .abas button:hover{color:var(--ink)}
+  .abas button.on{color:var(--accent);border-bottom-color:var(--accent)}
+  @media (max-width:720px){ .abas{padding:0 18px} .abas button{padding:10px 12px;font-size:12.5px} }
+
+  /* ---------- Roteiros de video ---------- */
+  .rot{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;overflow:hidden}
+  .rot-head{padding:15px 20px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+  .rot-head .n{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+  .rot-head h4{margin:0 0 4px;font-family:var(--font-head);font-weight:400;font-size:19px}
+  .rot-head .meta{font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+  .rot-body{padding:18px 22px}
+  .fala{white-space:pre-line;font-size:15px;line-height:1.85;border-left:3px solid var(--accent-bright);padding:2px 0 2px 18px;margin:0}
+  .fala em{color:var(--muted);font-style:italic;font-size:13.5px}
+  .fala b{background:rgba(188,216,72,.22);font-weight:600;padding:1px 4px;border-radius:3px}
+
   /* ---------- Voltar ao topo ---------- */
   #topo{position:fixed;right:20px;bottom:20px;z-index:50;display:inline-flex;align-items:center;gap:7px;
     background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:999px;
@@ -157,6 +176,12 @@
   </div>
 </div>
 
+<div class="abas">
+  <button type="button" id="btnCalendario" class="on" onclick="trocarAba('calendario')">Calendário editorial</button>
+  <button type="button" id="btnVideos" onclick="trocarAba('videos')">Vídeos da CEO</button>
+</div>
+
+<div id="tabCalendario">
 <nav class="toc">
   <a href="#usar">Como usar</a>
   <a href="#cadencia">Cadência</a>
@@ -544,7 +569,6 @@ Vem com a gente.
         </div>
       </div>
 
-      <div class="post">
       <div class="post">
         <div class="post-head">
           <div class="post-meta"><span class="dia">Qui 13/08</span><span class="rede li">LinkedIn</span><span class="tag">Sintoma</span><span class="tag" style="border-color:var(--accent);color:var(--accent)">Ponte</span></div>
@@ -1386,8 +1410,244 @@ Quantos dias úteis reais o seu Q4 tem?
   </footer>
 
 </div>
+</div>
+
+<div id="tabVideos" style="display:none">
+<div class="doc">
+
+  <div class="section">
+    <h2>Vídeos da CEO</h2>
+    <p class="section-sub">Seis roteiros para a Fabíola gravar. Vídeo de CEO carrega uma autoridade que o mesmo texto na página da empresa não carrega — e cria reconhecimento de rosto, que é o que reduz a barreira da primeira conversa.</p>
+
+    <div class="callout">
+      <b class="lbl">A regra que economiza o tempo dela</b>
+      <p>Gravar os <b>seis numa sessão de uma hora</b>. Mesma roupa, mesmo cenário, mesma luz. Rende três meses de conteúdo — e o tempo da CEO é o recurso escasso, não a ideia.</p>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Item</th><th>Como fazer</th></tr></thead>
+        <tbody>
+          <tr><td><b>Duração</b></td><td>60 a 90 segundos. Uma ideia por vídeo.</td></tr>
+          <tr><td><b>Enquadramento</b></td><td>Vertical 9:16 — serve LinkedIn e Instagram sem recortar</td></tr>
+          <tr><td><b>Equipamento</b></td><td>Celular apoiado na altura dos olhos, luz de janela pela frente, fundo limpo. Sem microfone especial.</td></tr>
+          <tr><td><b>Edição</b></td><td>Nenhuma além da legenda. Vídeo muito produzido em B2B soa a propaganda; simples soa a especialista.</td></tr>
+          <tr><td><b>Legenda</b></td><td><b>Queimada, sempre.</b> A maior parte assiste sem som.</td></tr>
+          <tr><td><b>Abertura</b></td><td>Os 3 primeiros segundos são o gancho. Nunca começar com "oi, eu sou a Fabíola".</td></tr>
+          <tr><td><b>Publicação</b></td><td>Nativo no LinkedIn — link de YouTube derruba o alcance. E republicar no perfil pessoal dela.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="nota"><b>Na hora de gravar:</b> não decorar. Ler o roteiro algumas vezes, entender o raciocínio e falar com as próprias palavras. Se travar, recomeçar a frase — depois se corta. Falar mais devagar do que parece natural, porque no vídeo sempre soa mais rápido. Olhar para a lente, não para a tela. Dois segundos de pausa no início e no fim facilitam o corte.</p>
+
+    <p class="nota"><b>Trechos destacados em verde</b> são onde entra a história real dela — não dá para eu escrever no lugar. Vale uma conversa de 20 minutos antes da gravação para preencher.</p>
+  </div>
+
+  <div class="section">
+    <h2>Os seis roteiros</h2>
+    <p class="section-sub">O texto abaixo é para ler em voz alta. As quebras de linha marcam onde respirar.</p>
+
+    <div class="rot">
+      <div class="rot-head">
+        <div class="n">Vídeo 1 · gravar primeiro</div>
+        <h4>Por que a Obliant existe</h4>
+        <div class="meta">80 a 90 segundos · o único que ninguém além dela pode gravar</div>
+      </div>
+      <div class="rot-body">
+        <p class="fala">Eu passei anos vendo a mesma cena se repetir.
+
+<b>[Descreva a cena concreta que te incomodava — uma situação específica, não uma ideia geral. Do tipo: "empresa grande, projeto importante, e ninguém na sala conseguia dizer se ia entregar ou não."]</b>
+
+E o que me incomodava não era o problema.
+
+Era que a resposta do mercado para isso quase sempre vinha em forma de relatório. Mais controle, mais planilha, mais reunião. E nada mudava de verdade.
+
+<b>[O que você entendeu que faltava.]</b>
+
+Foi por isso que a Obliant existe.
+
+<b>[Uma frase sobre o que vocês fazem que os outros não fazem.]</b>
+
+A gente não vende diagnóstico bonito. A gente fica até a mudança sustentar sozinha.</p>
+      </div>
+    </div>
+
+    <div class="rot">
+      <div class="rot-head">
+        <div class="n">Vídeo 2</div>
+        <h4>A pergunta que eu faço em toda primeira reunião</h4>
+        <div class="meta">60 a 70 segundos · o mais alinhado à estratégia e o mais fácil de gravar</div>
+      </div>
+      <div class="rot-body">
+        <p class="fala">Toda primeira reunião com um cliente novo eu começo com a mesma pergunta.
+
+Não é sobre orçamento. Não é sobre prazo.
+
+É essa: quem controla cronograma, risco e priorização aqui dentro hoje?
+
+<em>[pausa]</em>
+
+E a resposta mais comum não é um nome.
+
+É um silêncio. Ou um "depende do projeto".
+
+Esse silêncio já me diz mais do que qualquer diagnóstico. Porque quando ninguém controla, todo mundo controla um pedaço — e aí ninguém consegue responder o que a diretoria pergunta.
+
+Se você não consegue responder essa pergunta com um nome, provavelmente não é de mais gente que a sua empresa precisa.
+
+É de governança.
+
+Qual seria a resposta aí na sua?</p>
+      </div>
+    </div>
+
+    <div class="rot">
+      <div class="rot-head">
+        <div class="n">Vídeo 3</div>
+        <h4>Quando eu diria para não contratar consultoria</h4>
+        <div class="meta">60 a 70 segundos · o que mais gera confiança do conjunto</div>
+      </div>
+      <div class="rot-body">
+        <p class="fala">Vou falar uma coisa que não costuma sair da boca de quem vende consultoria.
+
+Tem empresa que não precisa de consultoria. Precisa de decisão.
+
+<em>[pausa]</em>
+
+Quando eu vejo uma empresa com poucos projetos, todos andando, e o problema é falta de gente para executar — consultoria ali vira custo sem retorno.
+
+Consultoria resolve problema de método. De governança. De prioridade.
+
+Não resolve falta de braço.
+
+Eu já recusei projeto por isso. E olha, é o tipo de conversa que constrói mais confiança do que qualquer proposta comercial.
+
+Porque se eu digo com clareza para quem eu não sirvo, você acredita em mim quando eu digo para quem eu sirvo.</p>
+      </div>
+    </div>
+
+    <div class="rot">
+      <div class="rot-head">
+        <div class="n">Vídeo 4</div>
+        <h4>O erro mais caro que eu vejo</h4>
+        <div class="meta">70 a 80 segundos · o que mais gera salvamento</div>
+      </div>
+      <div class="rot-body">
+        <p class="fala">O erro mais caro que eu vejo em gestão de projetos não é atraso.
+
+É projeto que termina no prazo, dentro do orçamento — e ninguém sabe dizer se resolveu o problema que motivou o investimento.
+
+<em>[pausa]</em>
+
+Isso não gera crise. A ata é assinada. O status fecha verde. Todo mundo comemora.
+
+E seis meses depois o indicador que justificou aquele investimento continua exatamente igual.
+
+Atraso todo mundo enxerga. Esse aqui passa despercebido.
+
+E custa muito mais.
+
+A pergunta que evita isso é feita no começo, não no fim: qual número deveria mudar quando este projeto terminar?
+
+Se ninguém definiu isso no kickoff, não vai dar para responder no encerramento.</p>
+      </div>
+    </div>
+
+    <div class="rot">
+      <div class="rot-head">
+        <div class="n">Vídeo 5</div>
+        <h4>O que mudou em gestão de projetos</h4>
+        <div class="meta">70 a 80 segundos</div>
+      </div>
+      <div class="rot-body">
+        <p class="fala">Mudou uma coisa nos últimos anos, e ela mudou tudo.
+
+Antes, o valor de um gerente de projetos estava em controlar o cronograma.
+
+Hoje cronograma qualquer ferramenta controla.
+
+<em>[pausa]</em>
+
+O que ficou escasso foi outra coisa: alguém capaz de olhar quarenta iniciativas abertas e dizer quais três realmente importam.
+
+E conseguir interromper as outras trinta e sete.
+
+Priorizar é impopular. Ninguém gosta de ser a pessoa que mata um projeto.
+
+Mas é a função de maior valor numa empresa que está crescendo.
+
+E é justamente a que quase nenhuma estrutura interna consegue exercer sozinha — porque falta distanciamento.</p>
+      </div>
+    </div>
+
+    <div class="rot">
+      <div class="rot-head">
+        <div class="n">Vídeo 6</div>
+        <h4>Um erro que eu cometi</h4>
+        <div class="meta">70 a 80 segundos · o com maior chance de circular fora da rede de vocês</div>
+      </div>
+      <div class="rot-body">
+        <p class="fala">Eu vou contar um erro que eu cometi.
+
+<b>[Nomeia o erro direto, sem preâmbulo. Do tipo: "aceitei um projeto sabendo que o cliente não tinha quem decidisse do lado dele."]</b>
+
+<b>[O que aconteceu por causa disso.]</b>
+
+<em>[pausa]</em>
+
+O que eu entendi depois foi que <b>[o aprendizado, em uma frase]</b>.
+
+Hoje eu faço diferente: <b>[o que mudou na prática]</b>.
+
+E é por isso que a gente insiste tanto em definir quem decide antes de começar. Não é preciosismo de método. É cicatriz.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Onde entram no calendário</h2>
+    <p class="section-sub">Um vídeo a cada duas semanas, ocupando o slot de terça. Não é conteúdo extra — é o mesmo dia trocando de formato.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Data</th><th>Vídeo</th></tr></thead>
+        <tbody>
+          <tr><td class="dia">Ter 18/08</td><td>Por que a Obliant existe</td></tr>
+          <tr><td class="dia">Ter 01/09</td><td>A pergunta que eu faço em toda primeira reunião</td></tr>
+          <tr><td class="dia">Ter 15/09</td><td>Quando eu diria para não contratar consultoria</td></tr>
+          <tr><td class="dia">Ter 29/09</td><td>O erro mais caro que eu vejo</td></tr>
+          <tr><td class="dia">Ter 13/10</td><td>O que mudou em gestão de projetos</td></tr>
+          <tr><td class="dia">Ter 27/10</td><td>Um erro que eu cometi</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="nota"><b>Se a agenda dela apertar</b>, gravar nesta ordem — os três primeiros já sustentam dois meses: <b>2</b> (a pergunta), <b>3</b> (quando não contratar) e <b>4</b> (o erro mais caro). São os três que não dependem de história pessoal e podem ser gravados sem preparação.</p>
+  </div>
+
+  <footer>
+    Squad Omnichannel · Obliant · PE 3Q26 — roteiros para gravação da CEO, alinhados ao calendário editorial e aos produtos da Fase 1.
+  </footer>
+
+</div>
+</div>
 
 <button id="topo" type="button" aria-label="Voltar ao topo"><span>&uarr;</span> Voltar ao topo</button>
+
+<script>
+var ABAS = { calendario: 'tabCalendario', videos: 'tabVideos' };
+function trocarAba(nome){
+  for (var k in ABAS) {
+    document.getElementById(ABAS[k]).style.display = (k === nome) ? '' : 'none';
+    var b = document.getElementById('btn' + k.charAt(0).toUpperCase() + k.slice(1));
+    if (b) { if (k === nome) b.classList.add('on'); else b.classList.remove('on'); }
+  }
+  // Duas coordenadas, nao o objeto com behavior: a forma em objeto nao rola em
+  // alguns navegadores. A suavidade vem do scroll-behavior do CSS.
+  window.scrollTo(0, 0);
+  if (history.replaceState) history.replaceState(null, '', nome === 'calendario' ? location.pathname : '#videos');
+}
+if (location.hash === '#videos') trocarAba('videos');
+</script>
 
 <script>
 (function(){
